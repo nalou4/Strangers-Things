@@ -1,0 +1,79 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+}
+
+#app{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+#header-container{
+    /* border: solid 5px lightslategray; */
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(23, 23, 77);
+    color: white;
+    font-family: 'Poppins';
+
+}
+
+#title {
+    /* border: solid 3px lightslategray; */
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+#nav-bar-container{
+    /* border: solid 3px lightslategray; */
+    flex-grow: 2;
+    background-color: rgb(88, 88, 235);
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#nav-button{
+    /* border: solid 3px lightslategray; */
+    color: white;
+}
+
+#post-container{
+    /* border: solid 5px blue; */
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 6;
+    font-family: 'Poppins';
+
+}
+
+#posts {
+    /* border: solid 5px orange; */
+    flex-grow: 2;
+    background-color: rgb(243, 243, 243);
+    color: rgb(23, 23, 77);
+    text-align: center;
+}
+
+#new-posts{
+    border: solid 5px yellow;
+    flex-grow: 1;
+    text-align: center;
+}
+
