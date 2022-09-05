@@ -12,15 +12,15 @@ const Header = () => {
                 </div>
                 <nav id="nav-bar-container">
                     <div id="nav-button">
-                        <Link to="Listings">List an item</Link>
+                        <Link to="Listings">Posts</Link>
                     </div>
                     <div id="nav-button">
-                        <Link to="LogIn">Log in</Link>
+                        <Link to="Profile">My profile</Link>
                     </div>
                     <div id="nav-button">
-
                         <Link to="LogOut">Log out</Link>
                     </div>
+
                 </nav>
 
             </div>

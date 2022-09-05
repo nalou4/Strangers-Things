@@ -4,7 +4,7 @@ const Listings = () => {
             <div id="post-container">
                 <div id="posts">
                     <h3>
-                        Current Listings
+                        Current listings
                     </h3>
                     <h5>
                         Shop the marketplace
