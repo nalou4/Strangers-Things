@@ -12,7 +12,7 @@ const Header = () => {
                 </div>
                 <nav id="nav-bar-container">
                     <div id="nav-button">
-                        <Link to="Listings">Posts</Link>
+                        <Link to="Posts">Posts</Link>
                     </div>
                     <div id="nav-button">
                         <Link to="Profile">My profile</Link>

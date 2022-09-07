@@ -3,38 +3,38 @@ import { useEffect, useState } from "react";
 
 import Home from "./Home";
 import Header from "./Header";
-import { fetchPosts } from "../api";
-import Listings from "./Listings";
+import Posts from "./Posts";
 import { register } from "../api";
-
+import { fetchPosts } from "../api";
+import { getPosts } from "./Posts";
 
 const App = () => {
-    const [user, setUser] = useState('');
-
-    useEffect(() => {
-        const registerUser = async () => {
-            const user = await register()
-            setUser(user)
-        }
-        registerUser()
-    }, [])
-
-    // const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([]);
+    // const [user, setUser] = useState('');
 
     // useEffect(() => {
-    //     const getPosts = async () => {
-    //         const posts = await fetchPosts()
-    //         setPosts(posts)
+    //     const registerUser = async () => {
+    //         const user = await register()
+    //         setUser(user)
     //     }
-    //     getPosts()
+    //     registerUser()
     // }, [])
+
+    useEffect(() => {
+        const getPosts = async () => {
+            const posts = await fetchPosts()
+            console.log(posts)
+            setPosts(posts)
+        }
+        getPosts()
+    }, [])
 
     return (
         <>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/Listings" element={<Listings />} />
+                <Route path="/Posts" element={<Posts posts={posts}/>} />
                 {/* <Route path="/Account" element={<Account />} /> */}
                 {/* <Route path="/Listing" element={<Listing />}/> */}
             </Routes>

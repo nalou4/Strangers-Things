@@ -95,3 +95,18 @@ a {
     flex-grow: 1;
     text-align: center;
 }
+
+.post{
+    border: solid 3px gray;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    width: 500px;
+
+}
+
+.post-text{
+    font-size: smaller;
+    color: rgb(116, 116, 233);
+    /* border: solid 3px orange; */
+}

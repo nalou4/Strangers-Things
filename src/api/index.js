@@ -1,6 +1,22 @@
 // import { register } from "../components/LogIn";
 
-const baseUrl = 'https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/api/2206-ftb-pt-web-pt';
+const baseUrl = 'https://strangers-things.herokuapp.com/api/2206-FTB-PT-WEB-PT';
+
+export const fetchPosts = async () => {
+
+try{
+    const result = await fetch (baseUrl + '/posts');
+    const { data } = await result.json();
+    console.log('here')
+    return data.posts
+}
+catch{
+    console.error('there was an error when fetching posts')
+}
+
+}
+
+
 
 
 export async function register (username, password){
@@ -21,9 +37,6 @@ export async function register (username, password){
     console.log(data)
     return data;
 }
-
-
-
 
 
 // export async function fetchPosts() {

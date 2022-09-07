@@ -1,4 +1,4 @@
-const baseUrl = 'https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/api/2206-ftb-pt-web-pt';
+const baseUrl = 'https://strangers-things.herokuapp.com/api/2206-ftb-pt-web-pt/';
 
 console.log('hello')
 
@@ -6,8 +6,7 @@ export async function register (username, password){
     const result = await fetch (baseUrl + 'users/register', {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer TOKEN_STRING_HERE'        
+            'Content-Type': 'application/json',       
         },
         body: JSON.stringify({
             user: {
@@ -27,8 +26,7 @@ export async function logIn (username, password){
     const result = await fetch (baseUrl + 'users/login', {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer TOKEN_STRING_HERE'        
+            'Content-Type': 'application/json',       
         },
         body: JSON.stringify({
             user: {

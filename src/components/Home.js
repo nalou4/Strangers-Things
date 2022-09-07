@@ -4,7 +4,7 @@ const Home = () => {
             <div id="post-container">
                 <div id="posts">
                     <h3>
-                        Current listings
+                        Current posts
                     </h3>
                     <h5>
                         Shop the marketplace
@@ -15,7 +15,7 @@ const Home = () => {
                 </div>
                 <div id="new-posts">
                     <h3>
-                        Create a new listing
+                        Create a new post
                     </h3>
                     <form>
 
