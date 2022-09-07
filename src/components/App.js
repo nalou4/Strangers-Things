@@ -7,6 +7,7 @@ import Posts from "./Posts";
 import { register } from "../api";
 import { fetchPosts } from "../api";
 import { getPosts } from "./Posts";
+import LogIn from "./LogIn";
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -33,7 +34,8 @@ const App = () => {
         <>
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
+                {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/" element={<LogIn />} />
                 <Route path="/Posts" element={<Posts posts={posts}/>} />
                 {/* <Route path="/Account" element={<Account />} /> */}
                 {/* <Route path="/Listing" element={<Listing />}/> */}

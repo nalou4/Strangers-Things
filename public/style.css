@@ -110,3 +110,21 @@ a {
     color: rgb(116, 116, 233);
     /* border: solid 3px orange; */
 }
+
+.registration-form{
+    border: solid 5px orange;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+
+}
+
+.field{
+    /* background-color: blanchedalmond; */
+}
+
+.input{
+    text-align: center;
+    /* border: solid 2px grey; */
+}
