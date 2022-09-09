@@ -1,43 +1,61 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { fetchUser, fetchPosts } from "../api";
 
 import Home from "./Home";
 import Header from "./Header";
 import Posts from "./Posts";
-import { register } from "../api";
-import { fetchPosts } from "../api";
 import { getPosts } from "./Posts";
-import LogIn from "./LogIn";
+import AccountForm from "./AccountForm";
+import UserLogIn from "./UserLogIn";
+
+export const logOut = () => {
+    setToken("");
+    setGuest(null);
+    Navigate("/")
+}
 
 const App = () => {
     const [posts, setPosts] = useState([]);
-    // const [user, setUser] = useState('');
+    const [token, setToken] = useState(window.localStorage.getItem('token'));
+    const [user, setUser] = useState(null);
 
-    // useEffect(() => {
-    //     const registerUser = async () => {
-    //         const user = await register()
-    //         setUser(user)
-    //     }
-    //     registerUser()
-    // }, [])
+
+    // const logOut = () => {
+    //     setToken("");
+    //     setGuest(null);
+    //     Navigate("/")
+    // }
 
     useEffect(() => {
         const getPosts = async () => {
             const posts = await fetchPosts()
-            console.log(posts)
             setPosts(posts)
-        }
+        };
         getPosts()
     }, [])
 
+    useEffect(() => {
+        if (token) {
+            const getUser = async () => {
+                const { user } = await fetchUser(token);
+                setUser(user);
+            }
+            getUser();
+        }
+    }, [token])
+
     return (
         <>
-            <Header />
+            <Header token = {token} />
             <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
-                <Route path="/" element={<LogIn />} />
-                <Route path="/Posts" element={<Posts posts={posts}/>} />
-                {/* <Route path="/Account" element={<Account />} /> */}
+                <Route path="/" element={<Home />} />
+                <Route path="/" element={<AccountForm />} />
+                <Route path="/posts" element={<Posts posts={posts}/>} />
+                <Route path="/account" element={<AccountForm setToken={setToken} />} />
+                <Route path="/account/login" element={<UserLogIn />} />
+                <Route path="/account/signup" element={<AccountForm />} />
                 {/* <Route path="/Listing" element={<Listing />}/> */}
             </Routes>
         </>

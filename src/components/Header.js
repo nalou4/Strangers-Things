@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { logOut } from "./App";
 
-const Header = () => {
+
+const Header = ({ token }) => {
+
+
     return (
         <>
             <div id="header-container">
@@ -11,16 +15,27 @@ const Header = () => {
                     </h5>
                 </div>
                 <nav id="nav-bar-container">
-                    <div id="nav-button">
+                    <div className="nav-button">
                         <Link to="Posts">Posts</Link>
                     </div>
-                    <div id="nav-button">
-                        <Link to="Profile">My profile</Link>
+                    <div className="nav-button">
+                        {
+                            token ? (
+                                <Link to="Profile">My profile</Link>
+                            ) : (
+                                <Link to="/account/signup">Sign up</Link>
+                            )
+                        }
                     </div>
-                    <div id="nav-button">
-                        <Link to="LogOut">Log out</Link>
+                    <div className="nav-button">
+                        {
+                            token ? (
+                                <button className="nav-button" onClick={logOut}>Log out</button>
+                            ) : (
+                                <Link to="/account/login">Log in</Link>
+                            )
+                        }
                     </div>
-
                 </nav>
             </div>
         </>

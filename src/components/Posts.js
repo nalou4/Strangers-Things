@@ -54,8 +54,8 @@ const Posts = ({posts}) => {
                         Shop the marketplace
                     </h5>
                     {
-                        posts.map(p => (
-                            <div className="post">
+                        posts.map((p, index) => (
+                            <div className="post"key={index}>
                                 <div className="post-body">
                                     <h3 className="post-title">{p.title}</h3>
                                     <p className="post-text">{p.description}</p>
