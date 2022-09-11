@@ -1,83 +1,72 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-const baseUrl = 'https://strangers-things.herokuapp.com/api/2206-FTB-PT-WEB-PT';
+import CreatePostForm from "./CreatePostForm";
 
 
-// export const getPosts = async () => {
-//     const result = await fetch (baseUrl + '/posts', {
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     })
-//     const data = await result.json()
-//     console.log(data)
-//     console.log('getposts')
-//     setPosts(data)
-// }
+const Posts = ({ posts, token, setPosts }) => {
 
 
+    const [searchValue, setSearchValue] = useState("");
 
-// export const makePost = async (token, title, description, price) => {
-//     const result = await fetch (baseUrl + '/posts', {
-//         method: "POST",
-//         headers: {
-//             'Content-Type': '/application.json',
-//             Authorization: `Bearer ${token}`
-//         },
-//         body: JSON.stringify({
-//             post: {
-//                 title,
-//                 description,
-//                 price,
-//                 willDeliver: true
-//             }
-//         }),
-//     })
-//     const {data} = await result.json()
-//     console.log('hi')
-//     console.log("data: ", data);
-//     return data;
-// }
+    const postMatches = (post) => {
+        const textToCheck = (
+            post.title + post.description
+        ).toLowerCase();
+        return textToCheck.includes(searchValue.toLowerCase());
+    };
 
-// makePost(posts)
+    const filteredPosts = posts.filter((post) => {
 
+        return post ?  postMatches(post) : false;
+    });
 
-const Posts = ({posts}) => {
 
     return (
         <>
             <div id="post-container">
                 <div id="posts">
                     <h3>
-                        Current posts
+                        Shop the marketplace
                     </h3>
                     <h5>
-                        Shop the marketplace
+                        Search for a post
                     </h5>
-                    {
-                        posts.map((p, index) => (
-                            <div className="post"key={index}>
-                                <div className="post-body">
-                                    <h3 className="post-title">{p.title}</h3>
-                                    <p className="post-text">{p.description}</p>
-                                    <Link className="post-link" to=" ">View post</Link>
+                    <input
+                        type="text"
+                        className="field"
+                        placeholder="Search"
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                    />
+                    <div >
+                        {
+                            filteredPosts.map((p) => (
+                                <div key={p._id} className="post">
+                                    <div >
+                                        <div>
+                                            <h3 >{p.title}</h3>
+                                            <p className="post-text">{p.description}</p>
+                                            <Link to={`/posts/${p._id}`}>View post</Link>
+                                        </div>
+                                    </div>
                                 </div>
-
-                            </div>
-                        ) )
-                    }
+                            ))
+                        }
+                    </div>
                 </div>
                 <div id="new-posts">
                     <h3>
                         Create a new post
                     </h3>
-                    <form>
-
-                    </form>
+                    {
+                        token && (
+                            <CreatePostForm posts={posts} token={token} setPosts={setPosts} />
+                        )
+                    }
                 </div>
             </div>
         </>
-
     )
 }
 
-export default Posts
+export default Posts;

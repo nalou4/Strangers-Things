@@ -1,65 +1,64 @@
-import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { fetchUser, fetchPosts } from "../api";
+import { fetchUser, callApi } from "../api";
 
 import Home from "./Home";
 import Header from "./Header";
 import Posts from "./Posts";
-import { getPosts } from "./Posts";
 import AccountForm from "./AccountForm";
-import UserLogIn from "./UserLogIn";
-
-export const logOut = () => {
-    setToken("");
-    setGuest(null);
-    Navigate("/")
-}
+// import UserLogIn from "./UserLogIn";
+import SinglePost from "./SinglePost";
+import Profile from "./Profile";
 
 const App = () => {
+
     const [posts, setPosts] = useState([]);
     const [token, setToken] = useState(window.localStorage.getItem('token'));
     const [user, setUser] = useState(null);
 
-
-    // const logOut = () => {
-    //     setToken("");
-    //     setGuest(null);
-    //     Navigate("/")
-    // }
-
     useEffect(() => {
         const getPosts = async () => {
-            const posts = await fetchPosts()
-            setPosts(posts)
+            const {posts} = await callApi({path: "/posts", token});
+            setPosts(posts);
         };
         getPosts()
-    }, [])
+    }, [token])
 
     useEffect(() => {
         if (token) {
             const getUser = async () => {
-                const { user } = await fetchUser(token);
+                const user  = await fetchUser(token);
                 setUser(user);
-            }
+            };
             getUser();
         }
     }, [token])
 
+    useEffect(() => {
+        window.localStorage.setItem("token", token);
+    }, [token]);
+
     return (
         <>
-            <Header token = {token} />
+            <Header token={token} setToken={setToken} setUser={setUser} />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/" element={<AccountForm />} />
-                <Route path="/posts" element={<Posts posts={posts}/>} />
-                <Route path="/account" element={<AccountForm setToken={setToken} />} />
-                <Route path="/account/login" element={<UserLogIn />} />
-                <Route path="/account/signup" element={<AccountForm />} />
-                {/* <Route path="/Listing" element={<Listing />}/> */}
+                <Route path="/" element={<Home user={user} />} />
+                
+                <Route path="/profile" element={<Profile user={user} />} />
+
+                <Route path="/posts" element={<Posts posts={posts} token={token} setPosts={setPosts}/>} />
+
+                <Route path="/posts/:postId" element={<SinglePost posts={posts} token={token}/>} ></Route>
+
+                <Route path="/account/:action" element={<AccountForm setToken={setToken}/>}></Route>
+                {/* <Route path="/account/signup" element={<AccountForm setToken={setToken} />} />
+                <Route path="/account/login" element={<UserLogIn />} /> */}
             </Routes>
         </>
     );
 };
+
+
 
 export default App;

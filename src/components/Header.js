@@ -1,8 +1,16 @@
 import { Link } from "react-router-dom";
-import { logOut } from "./App";
+import { useNavigate } from "react-router-dom";
 
 
-const Header = ({ token }) => {
+const Header = ({ token, setToken, setUser }) => {
+
+    const navigate = useNavigate();
+
+    const logOut = () => {
+        setToken("");
+        setUser(null);
+        navigate("/");
+    }
 
 
     return (
