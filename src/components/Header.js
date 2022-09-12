@@ -12,7 +12,6 @@ const Header = ({ token, setToken, setUser }) => {
         navigate("/");
     }
 
-
     return (
         <>
             <div id="header-container">
@@ -24,12 +23,12 @@ const Header = ({ token, setToken, setUser }) => {
                 </div>
                 <nav id="nav-bar-container">
                     <div className="nav-button">
-                        <Link to="Posts">Posts</Link>
+                        <Link to="Posts">All posts</Link>
                     </div>
                     <div className="nav-button">
                         {
                             token ? (
-                                <Link to="Profile">My profile</Link>
+                                <Link to="Profile">My posts</Link>
                             ) : (
                                 <Link to="/account/signup">Sign up</Link>
                             )

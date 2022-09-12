@@ -22,8 +22,6 @@ export async function register (username, password){
     return data;
 }
 
-
-
 export async function logIn(username, password) {
     const result = await fetch(baseUrl + '/users/login', {
         method: "POST",
@@ -63,18 +61,12 @@ export const callApi = async ({method, path, token, body}) => {
         method: method ? method : "GET",
         headers: {
             "Content-Type": "application/json",
-            // 'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(body),
     };
 
-    // console.log('path :>> ', path);
-    // console.log('method :>> ', method);
-    // console.log('options :>> ', options);
-
     if (token){
         options.headers.Authorization = `Bearer ${token}`;
-        // console.log('options :>> ', options);
     }
 
     if (body){
@@ -84,23 +76,11 @@ export const callApi = async ({method, path, token, body}) => {
     const result = await fetch(baseUrl + path, options);
     const data = await result.json();
 
-    // if (!result.ok) {
-    //     throw data.error.message
-    // }
-
     if (data.error){
         throw data.error.message;
     }
     return data.data;
 }
-
-// export const addPost = async(){
-
-// }
-
-
-// fetch(baseUrl)
-// .then(res => console.log(res))
 
 export const addPostFetch = async (token, title, description, price, willDeliver = false) =>{
 
@@ -120,12 +100,5 @@ export const addPostFetch = async (token, title, description, price, willDeliver
         })
     })
     const serverResponse = await res.json();
-    console.log('serverResponse :>> ', serverResponse);
-
-
-
-    // .then(res => res.json())
-    // .then(data => data)
-    // .catch((error) => {console.log(error)})
 }
 

@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { fetchUser, callApi } from "../api";
@@ -7,7 +7,6 @@ import Home from "./Home";
 import Header from "./Header";
 import Posts from "./Posts";
 import AccountForm from "./AccountForm";
-// import UserLogIn from "./UserLogIn";
 import SinglePost from "./SinglePost";
 import Profile from "./Profile";
 
@@ -49,11 +48,10 @@ const App = () => {
 
                 <Route path="/posts" element={<Posts posts={posts} token={token} setPosts={setPosts}/>} />
 
-                <Route path="/posts/:postId" element={<SinglePost posts={posts} token={token}/>} ></Route>
+                <Route path="/posts/:postId" element={<SinglePost posts={posts} token={token} setPosts={setPosts}/>} ></Route>
 
                 <Route path="/account/:action" element={<AccountForm setToken={setToken}/>}></Route>
-                {/* <Route path="/account/signup" element={<AccountForm setToken={setToken} />} />
-                <Route path="/account/login" element={<UserLogIn />} /> */}
+
             </Routes>
         </>
     );

@@ -31,7 +31,7 @@ const AccountForm = ({ setToken }) => {
 
     return (
         <>
-            <p>{title}</p>
+            <h2 id="home">{title}</h2>
             <form onSubmit={handleSubmit} className="registration-form">
 
                 <label htmlFor="username" className="field">
@@ -57,17 +57,7 @@ const AccountForm = ({ setToken }) => {
                         minLength={5}
                         required />
                 </label>
-
-                {/* /*how do i get rid of confirm password with login using ternary?*/}
-
-                {/* {
-                    !"login" ? (<label htmlFor="password" className="field">
-                        Confirm password
-                        <input className="input" type="text" placeholder="confirm password" minLength={5} required />
-                    </label>) : ("")
-                } */}
-
-                {/* <input type="submit" value="Submit" /> */}
+                
                 <button type="submit" className="button">
                     Submit
                 </button>

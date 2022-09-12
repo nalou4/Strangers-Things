@@ -1,44 +1,20 @@
 import { Link } from "react-router-dom"
 
-const Home = ({user}) => {
+const Home = ({ user }) => {
     return (
-        // <>
-        //     <div id="post-container">
-        //         <div id="posts">
-        //             <h3>
-        //                 Current posts
-        //             </h3>
-        //             <h5>
-        //                 Shop the marketplace
-        //             </h5>
-        //             <form>
-
-        //             </form>
-        //         </div>
-        //         <div id="new-posts">
-        //             <h3>
-        //                 Create a new post
-        //             </h3>
-        //             <form>
-
-        //             </form>
-        //         </div>
-        //     </div>
-        // </>
-
         <>
-            <h1>Welcome to Strangers' Things!</h1>
-            {user && (
-                <p>
-                    Logged in as <Link to="/profile">{user.username}</Link>
-                </p>
+            <h1 id="home">Welcome to our Digital Marketplace!</h1>
+            {!user && (
+                <h3 id="link">
+                    <Link to="/account/:action">Click here to Get Started </Link>
+                </h3>
             )}
-
+            {user && (
+                <h3 className="sub-title">
+                    You're logged in as <Link id="link" to="/profile">{user.username}</Link>
+                </h3>
+            )}
         </>
-
-
-
-
     )
 }
 

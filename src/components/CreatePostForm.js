@@ -1,4 +1,4 @@
-import { addPostFetch, callApi } from "../api";
+import { addPostFetch } from "../api";
 import { useState } from "react";
 
 function CreatePostForm({ token, setPosts }) {
@@ -16,30 +16,7 @@ function CreatePostForm({ token, setPosts }) {
         console.log('description :>> ', description);
 
         try {
-
-            const post = await addPostFetch( token, title, description, price, willDeliver )
-
-            // const { post } = await callApi({
-            //     method: "POST",
-            //     path: "/posts",
-            //     token,
-            //     body: {
-            //         posts: {
-            //             title,
-            //             price,
-            //             description,
-            //             willDeliver
-            //         },
-            //     },
-            // });
-
-            // post.isAuthor = true;
-
-            // console.log('path :>> ', path);
-            // console.log('method :>> ', method);
-
-            // console.log('post :>> ', post);
-
+            const post = await addPostFetch(token, title, description, price, willDeliver)
             setPosts((prev) => [post, ...prev]);
             setTitle("");
             setDescription("");
@@ -79,18 +56,21 @@ function CreatePostForm({ token, setPosts }) {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
+                    <div id="will-deliver">
+                        <label htmlFor="willDeliver"> Will Deliver?</label>
+                        <input
+                            type="checkbox"
+                            name="willDeliver"
+                            className="field"
+                            value={willDeliver}
+                            onChange={(e) => setwillDeliver(e.target.checked)}
+                        />
+                    </div>
 
-                    <label htmlFor="willDeliver"> Will Deliver?</label>
-                    <input
-                        type="checkbox"
-                        name="willDeliver"
-                        className="field"
-                        value={willDeliver}
-                        onChange={(e) => setwillDeliver(e.target.checked)}
-                    />
                 </div>
 
                 <button
+                    id="add-post-button"
                     type="submit"
                     className="button">add post</button>
             </form>

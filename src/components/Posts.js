@@ -16,8 +16,7 @@ const Posts = ({ posts, token, setPosts }) => {
     };
 
     const filteredPosts = posts.filter((post) => {
-
-        return post ?  postMatches(post) : false;
+        return post ? postMatches(post) : false;
     });
 
 
@@ -25,19 +24,17 @@ const Posts = ({ posts, token, setPosts }) => {
         <>
             <div id="post-container">
                 <div id="posts">
-                    <h3>
+                    <h2>
                         Shop the marketplace
-                    </h3>
-                    <h5>
-                        Search for a post
-                    </h5>
-                    <input
-                        type="text"
-                        className="field"
-                        placeholder="Search"
-                        value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
-                    />
+                    </h2>
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Search for a post"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                        />
+                    </div>
                     <div >
                         {
                             filteredPosts.map((p) => (
@@ -54,16 +51,16 @@ const Posts = ({ posts, token, setPosts }) => {
                         }
                     </div>
                 </div>
-                <div id="new-posts">
-                    <h3>
-                        Create a new post
-                    </h3>
-                    {
-                        token && (
-                            <CreatePostForm posts={posts} token={token} setPosts={setPosts} />
-                        )
-                    }
-                </div>
+                {
+                    token && (
+                            <div id="new-posts-container">
+                                <div id="new-posts">
+                                    <h3>Create a new post</h3>
+                                    <CreatePostForm posts={posts} token={token} setPosts={setPosts} />
+                                </div>
+                            </div>
+                    )
+                }
             </div>
         </>
     )

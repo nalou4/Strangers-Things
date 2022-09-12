@@ -7,12 +7,12 @@ function Profile({ user }) {
     if (!user) return null;
 
     return (
-        <div>
+        <div className="sub-title">
             <h1>
                 My Posts
             </h1>
             {
-                user.posts.map((p) => (
+                user.posts.filter((post) => post.active).map((p) => (
                     <Post key={p._id} post={p}/>
                 ))
             }
