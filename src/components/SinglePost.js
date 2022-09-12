@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { callApi } from "../api";
 import { useState } from "react";
 
-function SinglePost({ posts, token, setPosts}) {
+function SinglePost({ posts, token, setPosts }) {
     const [content, setContent] = useState("");
     const { postId } = useParams();
 
@@ -20,6 +20,7 @@ function SinglePost({ posts, token, setPosts}) {
                 token,
             });
             setContent("");
+            console.log('messages :>> ', messages);
         } catch (err) {
             console.error(err);
         }
@@ -51,30 +52,38 @@ function SinglePost({ posts, token, setPosts}) {
 
                         {post.isAuthor && (
                             <div>
-                                {post.messages.map(m => <h3 key={m._id} >{m.content}</h3>)}
+                                {post.messages.map(m =>
+                                (<div className="post">
+                                    <h2>My messages</h2>
+                                    <h3 key={m._id}>
+                                        {m.fromUser.username} says: 
+                                        "{m.content}"
+                                    </h3>
+                                </div>)
+                                )}
                                 <button
                                     id="delete-button"
                                     onClick={() => deletePost(post._id)}>Delete</button>
                             </div>
                         )}
                         {!post.isAuthor && token && (
-                            <div>
-                                <div className="post">
-                                    <h3>Send a message</h3>
-                                    <form onSubmit={handleSubmit}>
-                                        <textarea
-                                            type="text"
-                                            value={content}
-                                            onChange={(e) => setContent(e.target.value)}
-                                            className="field"
-                                            placeholder="type message here"
-                                        ></textarea>
-                                        <button type="submit">
-                                            Send
-                                        </button>
-                                    </form>
-                                </div>
+
+                            <div className="post">
+                                <h3>Send a message</h3>
+                                <form onSubmit={handleSubmit}>
+                                    <textarea
+                                        type="text"
+                                        value={content}
+                                        onChange={(e) => setContent(e.target.value)}
+                                        className="field"
+                                        placeholder="type message here"
+                                    ></textarea>
+                                    <button type="submit">
+                                        Send
+                                    </button>
+                                </form>
                             </div>
+
 
                         )}
                     </div>
